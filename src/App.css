@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: dimgray;
 }
 
 .logo {
@@ -39,4 +40,28 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.cell {
+  width: 100px;
+  padding: 10px;
+  height: 100px;
+  gap: 10px;
+  border: 1px solid black;
+  display: block;
+  background-color: blanchedalmond;
+
+}
+
+.cell-active {
+  background-color: greenyellow;
+}
+
+.grid {
+  border: 2px solid rgb(221, 27, 27);
+  width: 425px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 20px;
 }
