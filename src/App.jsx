@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
@@ -12,12 +10,12 @@ function App() {
 
   const [activeCells, setActiveCells] = useState([]);
 
-  const Cell = ({key}) => {
+  const Cell = ({onClick, filled}) => {
 
     return(<div
-      key={key}
-      className={`cell ${activeCells.includes(key) ? 'cell-active' : ''}`}
-      onClick={()=>{setActiveCells([...activeCells, key])}}>
+      type="button"
+      className={`cell ${filled ? "cell-active " : ""}`}
+      onClick={onClick}>
 
     </div>);
 
@@ -28,8 +26,16 @@ function App() {
     <div className='grid'>
       {config.flat(1).map((item, index)=>(
          (item === 1) ? 
-        (<Cell key={index} />)
-        : (<span/>) 
+        (<Cell
+          key={index}
+          onClick={()=>{
+            console.log('clicked', index);
+            console.log('activeCells', activeCells);
+            setActiveCells([...activeCells, index])}}
+          filled={activeCells.includes(index)}
+          
+           />)
+        : (<span key={index} />)
       ))}
 
     </div>
