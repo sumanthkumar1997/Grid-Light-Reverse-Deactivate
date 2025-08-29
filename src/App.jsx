@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -9,6 +9,16 @@ function App() {
   ];
 
   const [activeCells, setActiveCells] = useState([]);
+  const [deactivateEnabled, setDeactivateEnabled] = useState(false);
+
+  useEffect(()=>{
+    if( (activeCells.length === config.flat(1).filter(item=>item===1).length) || deactivateEnabled ){
+      setDeactivateEnabled(true);
+     enableReverseCellDeactivate();
+     console.log("Completed");
+    }
+
+  }, [activeCells]);
 
   const Cell = ({onClick, filled}) => {
 
@@ -21,6 +31,27 @@ function App() {
 
   }
 
+  const enableReverseCellDeactivate = () => {
+
+    const interval = setTimeout(()=>{
+      setActiveCells(prev => {
+  if (prev.length === 0) {
+    setDeactivateEnabled(false);
+    clearTimeout(interval);
+    return [];
+  }
+  return prev.slice(0, -1); // remove last element
+});
+    }, 500);
+
+  }
+
+  const handleCellClick = (index) => {
+    if(activeCells.includes(index)) return;
+
+    setActiveCells([...activeCells, index])
+  }
+
   return (
     <>
     <div className='grid'>
@@ -31,7 +62,8 @@ function App() {
           onClick={()=>{
             console.log('clicked', index);
             console.log('activeCells', activeCells);
-            setActiveCells([...activeCells, index])}}
+            handleCellClick(index) }}
+           
           filled={activeCells.includes(index)}
           
            />)
