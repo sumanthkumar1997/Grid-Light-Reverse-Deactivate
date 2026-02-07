@@ -58,7 +58,7 @@
 }
 
 .grid {
-  border: 2px solid rgb(221, 27, 27);
+  /* border: 2px solid rgb(221, 27, 27); */
   width: 425px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
